@@ -22,3 +22,6 @@ accounts-password
 accounts-ui
 angular
 mdg:reload-on-resume
+less
+sebhero:angular-material-icons
+planettraining:material-design-icons
