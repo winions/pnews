@@ -1,0 +1,25 @@
+{
+  "name": "pnews",
+  "version": "0.0.1",
+  "homepage": "https://github.com/winions/pnews",
+  "authors": [
+    "Yasser Rabee <YasserRabee@gmail.com>"
+  ],
+  "description": "A social news app",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "~0.11.2",
+    "angular-messages": "~1.4.7",
+    "angular-sanitize": "~1.4.7",
+    "angular-ui-router": "~0.2.15"
+  },
+  "ignoredDependencies": [
+    "angular"
+  ]
+}

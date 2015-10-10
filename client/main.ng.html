@@ -1,0 +1,51 @@
+<div ui-view>
+
+    <div md-swipe-right="contentSwipeRight()"
+         md-swipe-left="contentSwipeLeft()">
+
+        <md-sidenav md-component-id="nav-left"
+                    ng-class="md-sidenav-left"
+                    style="max-width: 66%; min-width: 33%;">
+
+            <md-toolbar>
+                <h1 class="md-toolbar-tools">{{appName}}</h1>
+            </md-toolbar>
+
+            <div layout="column">
+                <md-button class="side-nav-item md-primary md-default-theme"
+                           ng-repeat="item in sideNavItems"
+                           ui-sref-active="side-nav-active"
+                           ui-sref="{{::item.state}}">
+                    <div layout-fill layout="row"
+                         layout-align="center center">
+
+                        <div class="side-nav-item-title" layout="column"
+                             layout-align="center start" flex>
+                            <div ng-bind-html="item.template"></div>
+                        </div>
+                    </div>
+                </md-button>
+
+            </div>
+        </md-sidenav>
+
+        <div flex layout="column">
+            <md-toolbar layout="row" layout-align="center center">
+                <div layout="column" ng-click="burgerIconClick()">
+                    side
+                </div>
+
+                <h1 layout="column" flex class="md-toolbar-tools">{{appName}}</h1>
+
+            </md-toolbar>
+
+            <div id="container" ui-view="content" layout="column" flex>
+                Content placeholder
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
