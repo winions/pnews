@@ -1,23 +1,30 @@
-<md-content class="screen-root view-post-screen"
+<md-content class="screen-root view-post-screen md-padding"
             ng-controller="viewPostController">
     <div layout="row" layout-align="start start">
         <div class="author">
-            <img ng-src="{{post.author.photo}}"
+            <img ng-src="{{series.author.photo}}"
                  class="avatar"
-                 alt="{{post.author.name}}"/>
+                 alt="{{series.author.name}}"/>
             <h4 style="margin: 0; font-weight: normal; max-width: 40px; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
-                {{post.author.name | characters:10}}</h4>
+                {{series.author.name | characters:10}}</h4>
         </div>
 
         <div class="title" flex>
-            <h2 class="main-title">{{post.title}}</h2>
-
-            <h4 class="sub-title date">
-                {{post.createdAt | date :'dd-MM-yyyy'}}
-            </h4>
+            <h2 class="main-title">{{series.title}}</h2>
         </div>
     </div>
-    <div class="post-actions">
+
+    <div class="posts">
+        <div ng-repeat="post in series.posts"
+             class="post-item">
+            <div layout="row" layout-align="start start">
+                <div class="title" flex>
+                    <h4 class="sub-title date">
+                        {{post.createdAt | date :'dd-MM-yyyy'}}
+                    </h4>
+                </div>
+            </div>
+            <div class="post-actions">
         <span class="hash-tags">
             <span class="tag" ng-repeat="tag in post.hashTags">
                 #{{tag}}
@@ -38,8 +45,10 @@
             </md-icon>
             <span class="number">{{post.votes.down}}</span>
         </span>
-    </div>
-    <div class="post-content md-padding">
-        {{post.content}}
+            </div>
+            <div class="post-content md-padding">
+                {{post.content}}
+            </div>
+        </div>
     </div>
 </md-content>
