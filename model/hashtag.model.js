@@ -1,4 +1,4 @@
-var HashTags = new Mongo.Collection('hashTags');
+HashTags = new Mongo.Collection('hashTags');
 var schemas = {};
 HashTags.allow({
   insert: function(userId, doc) {
