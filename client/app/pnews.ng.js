@@ -51,11 +51,20 @@ angular.module('pnews', [
                     controller: 'appController'
                 })
 
-                .state('main.home', {
-                    url: '/home',
+                .state('main.posts', {
+                    url: '/posts',
                     views: {
                         'content@main': {
                             templateUrl: 'client/home/home.ng.html'
+                        }
+                    }
+                })
+
+                .state('main.posts.view', {
+                    url: '/:id',
+                    views: {
+                        'content@main': {
+                            templateUrl: 'client/posts/view.ng.html'
                         }
                     }
                 })
@@ -71,14 +80,20 @@ angular.module('pnews', [
 
             ;
 
-            $urlRouterProvider.otherwise('/home');
+            $urlRouterProvider.otherwise('/posts');
         }
     ])
 
     .run([
         function () {
 
-            console.log('Starting pNews')
+            console.log('Starting pNews');
+
+            $('#container').height(window.innerHeight - 56);
+
+            $(window).resize(function () {
+                $('#container').height(window.innerHeight - 56);
+            });
 
         }
 
@@ -99,6 +114,10 @@ angular.module('pnews', [
             };
             $scope.contentSwipeLeft = function () {
                 SideNav.close();
+            };
+            $scope.sideMenuItemClick = function () {
+                SideNav.close();
+                $('#side-nav-toggle').focusout();
             };
         }
     ])

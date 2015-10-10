@@ -1,0 +1,32 @@
+@import "../app/vars";
+
+.post-card {
+  position: relative;
+  .card-cover {
+    height: 150px;
+  }
+  .card-title {
+    text-align: start;
+    padding: 8px;
+    //position: absolute;
+    //top: 70px;
+    color: @dark;
+  }
+
+  .card-content {
+    padding: 16px;
+    padding-top: 25px;
+    padding-bottom: 8px;
+    .read-more {
+      margin-top: 5px;
+      color: @md-accent;
+      font-weight: bold;
+    }
+  }
+  .card-footer {
+    padding: 8px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

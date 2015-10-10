@@ -8,9 +8,14 @@ angular.module('pnews-factories')
 
             var sideNavItems = [
                 {
-                    state: 'main.home',
+                    state: 'main.posts',
                     template: 'Home',
-                    icon: 'home'
+                    icon: 'icons/ic_home_black_24px.svg'
+                },
+                {
+                    state: 'main.auth',
+                    template: 'Login',
+                    icon: 'icons/ic_input_black_24px.svg'
                 }
             ];
 
