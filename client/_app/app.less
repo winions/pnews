@@ -1,0 +1,40 @@
+@import "vars";
+
+.screen-root {
+  height: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  .screen-header {
+    text-align: center;
+  }
+}
+
+.image-fill-container {
+  overflow: hidden;
+  & img.image-fill {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.image-stretch-container {
+  & img.image-stretch {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.image-fit-width-container {
+  overflow-y: hidden;
+  & img.image-fit-width {
+    min-width: 100%;
+    max-width: 100%;
+    height: auto;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
