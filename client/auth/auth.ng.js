@@ -1,9 +1,9 @@
 angular.module('pnews-controllers')
 
     .controller('authController', [
-        '$scope',
+        '$scope', 'authFactory',
 
-        function ($scope) {
+        function ($scope, authFactory) {
             var authModel = {
                 email: null,
                 password: null,
@@ -14,18 +14,36 @@ angular.module('pnews-controllers')
                 isRegister: false
             };
 
+            $scope.failureMessage = '';
+
             $scope.authModel = authModel;
 
             $scope.login = function () {
-                // TODO: login logic
+                var loginErr = authFactory.logIn(authModel.email, authModel.password);
+                if(loginErr){
+                    $scope.failureMessage = loginErr.reason;
+                }
+                console.log(loginErr);
             };
 
             $scope.register = function () {
-                var names = authModel.split(' ');
+                var names = authModel.name.split(' ');
                 authModel.firstName = names.splice(0, 1);
                 authModel.lastName = names.join(' ');
+                var registerErr = authFactory.register(authModel);
+                if(registerErr){
+                    $scope.failureMessage = registerErr.reason;
+                }
+                console.log(registerErr);
+            };
 
-                // TODO: register logic
+
+            $scope.forgotPassword = function () {
+                var forgotPasswordErr = authFactory.register(authModel.email);
+                if(forgotPasswordErr){
+                    $scope.failureMessage = forgotPasswordErr.reason;
+                }
+                console.log(forgotPasswordErr);
             };
         }
     ])
