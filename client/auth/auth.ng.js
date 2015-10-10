@@ -19,34 +19,32 @@ angular.module('pnews-controllers')
 
             $scope.authModel = authModel;
 
-            $scope.login = function () {
+            function showErr(err){
                 $scope.failureMessage = null;
-                var loginErr = authFactory.logIn(authModel.email, authModel.password);
-                if (loginErr) {
-                    $scope.failureMessage = loginErr.reason;
+                // var loginErr = authFactory.logIn(authModel.email, authModel.password);
+                if (err) {
+                    $scope.failureMessage = err.reason;
                 }
-                console.log(loginErr);
+            } 
+
+            $scope.login = function () {
+                console.log('login')
+                Meteor.loginWithPassword(authModel.email, authModel.password,showErr);
             };
 
             $scope.register = function () {
-                $scope.failureMessage = null;
-                var names = authModel.name.split(' ');
-                authModel.firstName = names.splice(0, 1);
-                authModel.lastName = names.join(' ');
-                var registerErr = authFactory.register(authModel);
-                if (registerErr) {
-                    $scope.failureMessage = registerErr.reason;
-                }
-                console.log(registerErr);
+                console.log('register')
+                authModel.profile = {};
+                var names = $scope.authModel.name.split(' ')
+                authModel.profile.firstName = names.splice(0, 1);
+                authModel.profile.lastName = names.join(' ');
+                Accounts.createUser(authModel,showErr);
+
             };
 
             $scope.forgotPassword = function () {
-                $scope.failureMessage = null;
-                var forgotPasswordErr = authFactory.register(authModel.email);
-                if (forgotPasswordErr) {
-                    $scope.failureMessage = forgotPasswordErr.reason;
-                }
-                console.log(forgotPasswordErr);
+                console.log('forgotPassword')
+                Accounts.forgotPassword({email:authModel.email},showErr);
             };
         }
     ])

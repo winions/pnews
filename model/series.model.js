@@ -1,4 +1,4 @@
-var Series = new Mongo.Collection('series');
+ Series = new Mongo.Collection('series');
 var schemas={};
 Series.allow({
   insert: function(userId, doc) {
@@ -18,14 +18,13 @@ Series.allow({
   }
 });
 
-Series.before.insert(function(userId, doc) {
-  return doc.post[0].postId = ObjectId();
-});
-
-// Series.before.update(function(userId, doc, fieldNames, modifier, options) {
-//   modifier.$set = modifier.$set || {};
-//   return modifier.$set.updatedAt = Date.now();
+// Series.before.insert(function (userId, doc) {
+//    doc.post[0].postId = new Mongo.ObjectID().valueOf();
 // });
+
+Series.before.update(function(userId, doc, fieldNames, modifier, options) {
+  return modifier.$push.post.postId = new Mongo.ObjectID().valueOf();
+});
 schemas.vote = new SimpleSchema({
   voter: {
     type: String,
@@ -43,29 +42,29 @@ schemas.hashTag = new SimpleSchema({
   }
 });
 
-schemas.post = new SimpleSchema({
-  postId: {
-    type: String,
-    optional : true
-    },
-  createdAt: {
-    type:Date,
-    optional : true    
-  },
-  content: {
-    type: String,
-    optional : true
-  },
-  hashtags : {
-    type: schemas.hashTag,
-    optional:true
-  },
-  vote: {
-  type: schemas.vote,
-  optional: true
-}
+// schemas.post = new SimpleSchema({
+//   postId: {
+//     type: String,
+//     optional : true
+//     },
+//   createdAt: {
+//     type:Date,
+//     optional : true    
+//   },
+//   content: {
+//     type: String,
+//     optional : true
+//   },
+//   hashtags : {
+//     type: schemas.hashTag,
+//     optional:true
+//   },
+//   vote: {
+//   type: schemas.vote,
+//   optional: true
+// }
 
-});
+// });
 
 schemas.series = new SimpleSchema({
   authorId: {
@@ -76,10 +75,36 @@ schemas.series = new SimpleSchema({
     type: String,
     max: 60
   },
-  post: {
-    type: schemas.post,
-    optional: true
-  }
+    post: {
+        type: [Object],
+        optional: true
+    },
+    "post.$.postId": {
+        type: String,
+        optional : true
+    },
+    "post.$.createdAt": {
+        type: String,
+        optional : true
+
+    },
+      "post.$.address": {
+      type: String,
+        optional : true
+    },
+    "post.$.content": {
+        type: String,
+        optional : true
+
+    },
+    "post.$.hashtags" : {
+      type:schemas.hashTag,
+      optional : true
+    },
+    "post.$.vote" : {
+      type:schemas.vote,
+      optional : true
+    }
 });
 
 Series.attachSchema(schemas.series);

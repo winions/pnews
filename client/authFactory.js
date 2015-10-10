@@ -5,29 +5,23 @@ angular.module('pnews-factories')
         function () {
             var authFactory = {};
 
-            authFactory.logIn = function(email, password){
-                console.log('authFactory.logIn');
-                console.log(authFactory.logIn);
-                var logInErr;
-                Meteor.loginWithPassword(email, password,function(err){
-                    if(err){
-                        console.log(err);
-                        logInErr = err;
-                    }else{
-                        console.log('No err');
-                        // $state.go('app.home');
-                    }
-                });
-                return logInErr;
-            };
+            // authFactory.logIn = function(email, password){
+            //     Meteor.loginWithPassword(email, password,function(err){
+                    
+            //     });
+            // };
 
+            authFactory.logIn = Meteor.loginWithPassword
+                
+            // authFactory.logOut = function(){
+            //     console.log('authFactory.logOut');
+            //     Meteor.logout(function(){
+            //         // $state.go('login')
+            //     });
+            // };
 
-            authFactory.logOut = function(){
-                console.log('authFactory.logOut');
-                Meteor.logout(function(){
-                    // $state.go('login')
-                });
-            };
+            authFactory.logOut = Meteor.logout;
+                
 
             authFactory.forgotPassword = function(email){
                 console.log('authFactory.forgetPassword');
