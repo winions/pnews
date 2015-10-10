@@ -1,0 +1,48 @@
+<div>
+    <!-- Home
+    <textarea ng-model="post.content">
+    	
+    </textarea>
+    <button ng-click="addPost(post)">Post</button>
+    <hr>
+    
+    
+
+    <label>last Name: </label>
+    <input ng-model= "user.profile.lastName">
+
+	<label>Email: </label>
+    <input ng-model= "user.email">
+
+	<label>Password: </label>
+    <input ng-model= "user.password">
+
+    <button ng-click="register(user)">Register</button>
+    <hr>
+
+	<label>Email: </label>
+    <input ng-model= "email">
+
+	<label>Password: </label>
+    <input ng-model= "password">
+
+    <button ng-click="logIn(email, password)">Log In</button>
+    
+    <hr>
+
+    <button ng-click="logOut()">Log Out</button>
+
+    <hr>
+
+    <label>Your Email: </label>
+    <input ng-model= "forgetPasswordEmail">
+
+    <button ng-click="forgotPassword(forgetPasswordEmail)">forget password</button>
+    
+    <hr> -->
+    <label>Users: </label>
+    <div ng-repeat="user in allUsers">
+        <a style="cursor:pointer" ng-click="sendPush(user)">{{user.profile.firstName + ' ' + user.profile.lastName}}</a>
+    </div>
+    <!-- <button ng-click="sendPush()">Click to push!</button> -->
+</div>

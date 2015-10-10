@@ -68,6 +68,14 @@ angular.module('pnews', [
                         }
                     }
                 })
+                .state('main.push', {
+                    url: '/push',
+                    views: {
+                        'content@main': {
+                            templateUrl: 'client/push.ng.html'
+                        }
+                    }
+                })
 
                 .state('main.auth', {
                     url: '/auth',
@@ -102,8 +110,9 @@ angular.module('pnews', [
     .controller('appController', [
         '$scope',
         'SideNav',
+        '$meteor',
 
-        function ($scope, SideNav) {
+        function ($scope, SideNav, $meteor) {
             $scope.appName = 'pNews';
             $scope.sideNavItems = SideNav.sideNavItems;
             $scope.burgerIconClick = function () {
@@ -119,6 +128,48 @@ angular.module('pnews', [
                 SideNav.close();
                 $('#side-nav-toggle').focusout();
             };
+
+
+            $scope.sendPush = function(user){
+                console.log('MEA trying to use push', user);
+                console.log(Push.send({
+                    from: 'System admin',
+                    title: 'News feed',
+                    text: 'This is some breaking news! Check them out!',
+                    query: { id: user.profile.gcmUserId }
+                    // query: {}
+                }));
+                // console.log('MEA current user', Meteor.user());
+
+                // user.profile.gcmToken = 'gcmToken';
+                // user.profile.gcmUserId = 'gcmUserId';
+                // console.log('MEA trying to save the user modification to db', user);
+                // $scope.allUsers.save();
+            };
+
+
+            Push.allow({
+              send: function(userId, notification) {
+                return true; // Allow all users to send
+              }
+            });
+
+            var gcmToken = null, gcmUserId = null;
+            Push.addListener('token', function(token) {
+              console.log('MEA Token: ' + JSON.stringify(token));
+              gcmToken = JSON.stringify(token); gcmUserId = Push.id();
+              alert('MEA Token: ' + JSON.stringify(token));
+              var currentUser = Meteor.user();
+                if (currentUser !== null){
+                  currentUser.profile.gcmToken = gcmToken;
+                  currentUser.profile.gcmUserId = gcmUserId;
+                  Meteor.users.update( { _id: Meteor.userId() }, { $set: { 'profile': currentUser.profile }} );
+                  console.log('MEA trying to update current User model', gcmToken, gcmUserId, currentUser);
+                }
+            });
+            
+            $scope.allUsers = $meteor.collection(Meteor.users, false).subscribe('users');
+            console.log('MEA all users', $scope.allUsers);
         }
     ])
 
