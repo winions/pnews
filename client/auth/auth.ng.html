@@ -29,21 +29,32 @@
                 </md-input-container>
             </div>
 
-            <md-input-container class="md-icon-float">
-                <label>Password</label>
-                <md-icon md-svg-src="icons/ic_lock_black_24px.svg"></md-icon>
-                <input name="password"
-                       type="password"
-                       ng-model="authModel.password"
-                       required
-                       maxlength="20">
-            </md-input-container>
+            <div ng-if="!authModel.isForgotPassword">
+                <md-input-container class="md-icon-float">
+                    <label>Password</label>
+                    <md-icon md-svg-src="icons/ic_lock_black_24px.svg"></md-icon>
+                    <input name="password"
+                           type="{{authModel.isShowPassword?'text':'password'}}"
+                           ng-model="authModel.password"
+                           required
+                           maxlength="20">
+                    <md-icon md-svg-src="icons/ic_remove_red_eye_black_24px.svg"
+                             style="left: inherit; right: 5px;"
+                             class="show-password"
+                             ng-class="{active: authModel.isShowPassword}"
+                             ng-click="authModel.isShowPassword=!authModel.isShowPassword"></md-icon>
+                </md-input-container>
+            </div>
+
 
         </form>
 
+        <div class="failure-message" ng-if="failureMessage">
+            {{failureMessage}}
+        </div>
 
         <div layout="column" layout-align="center center"
-             ng-if="!authModel.isRegister">
+             ng-if="!authModel.isRegister && !authModel.isForgotPassword">
             <md-button class="md-raised md-accent"
                        style="width: 50%"
                        ng-disabled="authForm.$invalid"
@@ -55,6 +66,12 @@
                        ng-click="authModel.isRegister=true">
                 Register
             </md-button>
+
+            <md-button md-no-ink class="register-button"
+                       ng-click="authModel.isForgotPassword=true">
+                Forgot Password?
+            </md-button>
+
         </div>
 
         <div layout="column" layout-align="center center"
@@ -69,6 +86,21 @@
 
             <md-button md-no-ink class="register-button"
                        ng-click="authModel.isRegister=false">
+                Login
+            </md-button>
+        </div>
+
+        <div layout="column" layout-align="center center"
+             ng-if="authModel.isForgotPassword">
+            <md-button class="md-raised md-accent"
+                       style="width: 50%"
+                       ng-disabled="authForm.$invalid"
+                       ng-click="register()">
+                Request reset password
+            </md-button>
+
+            <md-button md-no-ink class="register-button"
+                       ng-click="authModel.isForgotPassword=false">
                 Login
             </md-button>
         </div>
