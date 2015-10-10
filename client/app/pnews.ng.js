@@ -1,6 +1,27 @@
 angular.module('pnews-controllers', []);
 angular.module('pnews-factories', []);
 angular.module('pnews-services', []);
+angular.module('pnews-directives', [])
+    .directive('trimText', [
+
+        function () {
+            return {
+                restrict: 'A',
+                scope: {
+                    model: "=trimText"
+                },
+                link: function (scope, element) {
+
+                    scope.$watch('model', function (newVal) {
+                        if (newVal) {
+                            element[0].innerText = element[0].innerText.trim();
+                        }
+                    });
+
+                }
+            };
+        }
+    ]);
 
 angular.module('pnews', [
     'angular-meteor',
@@ -8,10 +29,12 @@ angular.module('pnews', [
     'ngSanitize',
     'ngMessages',
     'ngMaterial',
-    'ngMdIcons',
     'ui.router',
+    'truncate',
     'pnews-controllers',
-    'pnews-factories'
+    'pnews-factories',
+    'pnews-services',
+    'pnews-directives'
 ])
 
     .config([
@@ -32,7 +55,7 @@ angular.module('pnews', [
                     url: '/home',
                     views: {
                         'content@main': {
-                            templateUrl: 'client/home.ng.html'
+                            templateUrl: 'client/home/home.ng.html'
                         }
                     }
                 })
@@ -64,42 +87,10 @@ angular.module('pnews', [
     .controller('appController', [
         '$scope',
         'SideNav',
-        'postFactory',
-        'authFactory',
 
-        function ($scope, SideNav, postFactory, authFactory) {
+        function ($scope, SideNav) {
             $scope.appName = 'pNews';
             $scope.sideNavItems = SideNav.sideNavItems;
-
-            $scope.addPost = function(post){
-                console.log('$scope.addPost')
-                console.log(post)
-                postFactory.addPost(post);
-            };
-
-            $scope.logIn = function(email, password){
-                console.log('$scope.login');
-                var result = authFactory.logIn(email, password);    
-                console.log(result);
-            };
-
-
-            $scope.logOut = function(email, password){
-                console.log('$scope.logOut');
-                authFactory.logOut();    
-            };
-
-
-            $scope.register = function(user){
-                console.log('$scope.register');
-                var result = authFactory.register(user);    
-            };
-
-            $scope.forgotPassword = function(email){
-                console.log('$scope.forgetPassword');
-                var result = authFactory.forgotPassword(email);    
-            };
-
             $scope.burgerIconClick = function () {
                 SideNav.toggle();
             };
@@ -113,3 +104,8 @@ angular.module('pnews', [
     ])
 
 ;
+
+Meteor.startup(function () {
+    console.log('Meteor startup');
+    angular.bootstrap(document, ['pnews']);
+});

@@ -35,11 +35,9 @@
 
         <div flex layout="column">
             <md-toolbar layout="row" layout-align="center center">
-                <ng-md-icon class="side-nav-toggle md-toolbar-tools"
-                            icon="menu"
-                            size="36"
-                            style="fill: rgba(255,255,255,0.87);"
-                            ng-click="burgerIconClick()"></ng-md-icon>
+                <md-icon md-svg-src="icons/ic_menu_black_24px.svg"
+                         class="side-nav-toggle"
+                         ng-click="burgerIconClick()"></md-icon>
 
                 <h1 layout="column" flex class="md-toolbar-tools">{{appName}}</h1>
 
