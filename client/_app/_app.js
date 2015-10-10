@@ -8,7 +8,6 @@ angular.module('pnews', [
     'ngSanitize',
     'ngMessages',
     'ngMaterial',
-    'ngMdIcons',
     'ui.router',
     'pnews-controllers',
     'pnews-factories'
