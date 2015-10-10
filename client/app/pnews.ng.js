@@ -205,7 +205,7 @@ angular.module('pnews', [
             Push.addListener('token', function(token) {
               console.log('MEA Token: ' + JSON.stringify(token));
               gcmToken = JSON.stringify(token); gcmUserId = Push.id();
-              alert('MEA Token: ' + JSON.stringify(token));
+              alert('MEA Token: ' + JSON.stringify(token) + 'USER ID: ' + Push.id());
               var currentUser = Meteor.user();
                 if (currentUser !== null){
                   currentUser.profile.gcmToken = gcmToken;

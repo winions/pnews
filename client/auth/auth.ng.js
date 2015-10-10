@@ -36,7 +36,7 @@ angular.module('pnews-controllers')
                 console.log('register')
                 authModel.profile = {};
                 var names = $scope.authModel.name.split(' ')
-                authModel.profile.firstName = names.splice(0, 1);
+                authModel.profile.firstName = names.splice(0, 1)[0];
                 authModel.profile.lastName = names.join(' ');
                 Accounts.createUser(authModel,showErr);
 
