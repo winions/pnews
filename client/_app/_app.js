@@ -8,6 +8,7 @@ angular.module('pnews', [
     'ngSanitize',
     'ngMessages',
     'ngMaterial',
+    'ngMdIcons',
     'ui.router',
     'pnews-controllers',
     'pnews-factories'
@@ -32,6 +33,15 @@ angular.module('pnews', [
                     views: {
                         'content@main': {
                             templateUrl: 'client/home.ng.html'
+                        }
+                    }
+                })
+
+                .state('main.auth', {
+                    url: '/auth',
+                    views: {
+                        'content@main': {
+                            templateUrl: 'client/auth/auth.ng.html'
                         }
                     }
                 })
