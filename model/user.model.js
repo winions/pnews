@@ -23,7 +23,7 @@ Schema.UserProfile = new SimpleSchema({
         optional: true
     },
         gcmToken: {
-        type: String,
+        type: Object,
         optional: true
     },
         gcmUserId: {

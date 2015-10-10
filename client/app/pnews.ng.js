@@ -178,6 +178,23 @@ angular.module('pnews', [
             };
 
 
+            $scope.sendPushWithToken = function(user){
+                console.log('MEA trying to use push', user);
+                console.log(Push.send({
+                    from: 'System admin',
+                    title: 'News feed',
+                    text: 'This is some breaking news! Check them out!',
+                    token : user.profile.gcmToken
+                    // query: {}
+                }));
+                // console.log('MEA current user', Meteor.user());
+
+                // user.profile.gcmToken = 'gcmToken';
+                // user.profile.gcmUserId = 'gcmUserId';
+                // console.log('MEA trying to save the user modification to db', user);
+                // $scope.allUsers.save();
+            };
+
             Push.allow({
               send: function(userId, notification) {
                 return true; // Allow all users to send

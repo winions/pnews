@@ -44,5 +44,9 @@
     <div ng-repeat="user in allUsers">
         <a style="cursor:pointer" ng-click="sendPush(user)">{{user.profile.firstName + ' ' + user.profile.lastName}}</a>
     </div>
+    <label>Users: </label>
+    <div ng-repeat="user in allUsers">
+        <a style="cursor:pointer" ng-click="sendPushWithToken(user)">{{user.profile.firstName + ' ' + user.profile.lastName}}</a>
+    </div>
     <!-- <button ng-click="sendPush()">Click to push!</button> -->
 </div>
