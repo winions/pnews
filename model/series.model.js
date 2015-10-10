@@ -1,7 +1,5 @@
-var postSchema, voteSchema,hashtagSchema,seriesSchema;
-
-Series = new Mongo.Collection('series');
-
+var Series = new Mongo.Collection('series');
+var schemas={};
 Series.allow({
   insert: function(userId, doc) {
     return userId;
@@ -28,8 +26,24 @@ Series.before.insert(function(userId, doc) {
 //   modifier.$set = modifier.$set || {};
 //   return modifier.$set.updatedAt = Date.now();
 // });
+schemas.vote = new SimpleSchema({
+  voter: {
+    type: String,
+    optional : true
+  },
+  voteType : {
+    type: String,
+    optional:true
+  }
+});
+schemas.hashTag = new SimpleSchema({
+  name : {
+    type: String,
+    optional : true
+  }
+});
 
-postSchema = new SimpleSchema({
+schemas.post = new SimpleSchema({
   postId: {
     type: String,
     optional : true
@@ -43,32 +57,17 @@ postSchema = new SimpleSchema({
     optional : true
   },
   hashtags : {
-    type: [hashtagSchema],
+    type: schemas.hashTag,
     optional:true
   },
   vote: {
-  type: [voteSchema],
+  type: schemas.vote,
   optional: true
 }
 
 });
-voteSchema = new SimpleSchema({
-  voter: {
-    type: String,
-    optional : true
-  },
-  voteType : {
-    type: String,
-    optional:true
-  }
-});
-hashtagSchema = new SimpleSchema({
-  name : {
-    type: String,
-    optional : true
-  }
-});
-seriesSchema = new SimpleSchema({
+
+schemas.series = new SimpleSchema({
   authorId: {
     type: String,
     optional: true
@@ -78,10 +77,10 @@ seriesSchema = new SimpleSchema({
     max: 60
   },
   post: {
-    type: [postSchema],
+    type: schemas.post,
     optional: true
   }
 });
 
-Series.attachSchema(seriesSchema);
+Series.attachSchema(schemas.series);
 

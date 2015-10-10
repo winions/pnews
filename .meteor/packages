@@ -20,5 +20,8 @@ mquandalle:bower
 raix:push
 accounts-password
 accounts-ui
-angular
 mdg:reload-on-resume
+aldeed:simple-schema
+matb33:collection-hooks
+aldeed:collection2
+angular

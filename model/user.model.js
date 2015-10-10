@@ -1,64 +1,67 @@
-var usersSchema,watchedByScehma;
-
-Users = new Mongo.Collection('users');
-
-Users.allow({
-  insert: function(userId, doc) {
-    return userId;
-  },
-  update: function(userId, doc, fields, modifier) {
-    if (userId !== doc._id) {
-      return false;
-    }
-    return true;
-  },
-  remove: function(userId, doc) {
-    if (userId !== doc._id) {
-      return false;
-    }
-    return true;
-  }
-});
-Users.before.insert(function(userId, doc) {
-  return doc.createdAt = new Date() ; 
-});
-
-
-usersSchema = new SimpleSchema({
-  firstName : {
-    type: String,
-    optional : true
-  },
-  lastName:{
-    type :string,
-    optional : true
-  },
-  userImage:{
-    type :String,
-    optional : true
-  },
-  watchedBy:{
-    type :[watchedByScehma],
-    optional : true
-  },
-    createdAt:{
-    type :Date,
-    optional : true
-  },
-    Bio:{
-    type :String,
-    optional : true
-  },
-    Country:{
-    type :String,
-    optional : true
-  }      
-});
-watchedByScehma = new SimpleSchema({
+var Schema = {};
+Schema.watchedBy = new SimpleSchema({
   watcherId : {
     type: String,
     optional : true
   }
 });
-Users.attachSchema(usersSchema);
+
+Schema.UserProfile = new SimpleSchema({
+    firstName: {
+        type: String,
+        regEx: /^[a-zA-Z-]{2,25}$/,
+        optional: true
+    },
+    lastName: {
+        type: String,
+        regEx: /^[a-zA-Z]{2,25}$/,
+        optional: true
+    },
+    gender: {
+        type: String,
+        allowedValues: ['Male', 'Female'],
+        optional: true
+    },
+    bio: {
+        type: String,
+        optional: true
+    },
+    country: {
+        type: String,
+        optional: true
+    },
+    userImage:{
+    type :String,
+    optional : true
+    },
+    watchedBy:{
+      type :Schema.watchedBy,
+      optional : true
+    }
+});
+
+
+Schema.User = new SimpleSchema({
+    username: {
+        type: String,
+        regEx: /^[a-z0-9A-Z_]{3,15}$/
+    },
+    emails: {
+        type: String,
+        optional: true
+    },
+    createdAt: {
+        type: Date
+    },
+    profile: {
+        type: Schema.UserProfile,
+        optional: true
+    }
+});
+
+Meteor.users.attachSchema(Schema.User);
+
+
+
+
 
