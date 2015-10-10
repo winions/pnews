@@ -1,0 +1,76 @@
+<div class="screen-root auth-screen" ng-controller="authController">
+    <div class="brand" layout="column" layout-align="center center">
+        <img class="logo" src="img/logo.png"/>
+    </div>
+    <div>
+        <h3 class="screen-header">Login to you account</h3>
+
+        <form name="authForm">
+
+            <md-input-container class="md-icon-float">
+                <label>Email</label>
+                <md-icon md-svg-src="icons/ic_email_black_24px.svg"></md-icon>
+                <input name="email"
+                       type="email"
+                       ng-model="authModel.email"
+                       required
+                       maxlength="50">
+            </md-input-container>
+
+            <div ng-if="authModel.isRegister">
+                <md-input-container class="md-icon-float">
+                    <label>Name</label>
+                    <md-icon md-svg-src="icons/ic_person_black_24px.svg"></md-icon>
+                    <input name="name"
+                           type="text"
+                           ng-model="authModel.name"
+                           required
+                           maxlength="50">
+                </md-input-container>
+            </div>
+
+            <md-input-container class="md-icon-float">
+                <label>Password</label>
+                <md-icon md-svg-src="icons/ic_lock_black_24px.svg"></md-icon>
+                <input name="password"
+                       type="password"
+                       ng-model="authModel.password"
+                       required
+                       maxlength="20">
+            </md-input-container>
+
+        </form>
+
+
+        <div layout="column" layout-align="center center"
+             ng-if="!authModel.isRegister">
+            <md-button class="md-raised md-accent"
+                       style="width: 50%"
+                       ng-disabled="authForm.$invalid"
+                       ng-click="login()">
+                Login
+            </md-button>
+
+            <md-button md-no-ink class="register-button"
+                       ng-click="authModel.isRegister=true">
+                Register
+            </md-button>
+        </div>
+
+        <div layout="column" layout-align="center center"
+             ng-if="authModel.isRegister">
+            <md-button class="md-raised md-accent"
+                       style="width: 50%"
+                       ng-disabled="authForm.$invalid"
+                       ng-click="register()">
+                Register
+            </md-button>
+
+
+            <md-button md-no-ink class="register-button"
+                       ng-click="authModel.isRegister=false">
+                Login
+            </md-button>
+        </div>
+    </div>
+</div>
