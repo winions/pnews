@@ -34,7 +34,12 @@ angular.module('pnews-controllers')
 
             $scope.register = function () {
                 console.log('register')
+                authModel.profile = {};
+                var names = $scope.authModel.name.split(' ')
+                authModel.profile.firstName = names.splice(0, 1);
+                authModel.profile.lastName = names.join(' ');
                 Accounts.createUser(authModel,showErr);
+
             };
 
             $scope.forgotPassword = function () {
