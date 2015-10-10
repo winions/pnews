@@ -20,8 +20,9 @@ mquandalle:bower
 raix:push
 accounts-password
 accounts-ui
-angular
 mdg:reload-on-resume
 less
-sebhero:angular-material-icons
-planettraining:material-design-icons
+aldeed:simple-schema
+matb33:collection-hooks
+aldeed:collection2
+angular

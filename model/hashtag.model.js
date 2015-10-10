@@ -1,8 +1,6 @@
-var hashtagsSchema,watchedByScehma;
-
-Hashtags = new Mongo.Collection('hashtags');
-
-Hashtags.allow({
+var HashTags = new Mongo.Collection('hashTags');
+var schemas = {};
+HashTags.allow({
   insert: function(userId, doc) {
     return userId;
   },
@@ -19,24 +17,24 @@ Hashtags.allow({
     return true;
   }
 });
-
-
-hashtagsSchema = new SimpleSchema({
-  name : {
-    type: String,
-    optional : true
-  },
-  watchedBy:{
-    type :[watchedByScehma],
-    optional : true
-  }
-});
-watchedByScehma = new SimpleSchema({
+schemas.watchedBy = new SimpleSchema({
   watcherId : {
     type: String,
     optional : true
   },
 });
 
-Hashtags.attachSchema(hashtagsSchema);
+schemas.hashTags = new SimpleSchema({
+  name : {
+    type: String,
+    optional : true
+  },
+  watchedBy:{
+    type :schemas.watchedBy,
+    optional : true
+  }
+});
+
+
+HashTags.attachSchema(schemas.hashTags);
 
