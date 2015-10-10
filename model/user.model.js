@@ -1,10 +1,10 @@
-// var Schema = {};
-// Schema.watchedBy = new SimpleSchema({
-//   watcherId : {
-//     type: String,
-//     optional : true
-//   }
-// });
+var Schema = {};
+Schema.watchedBy = new SimpleSchema({
+  watcherId : {
+    type: String,
+    optional : true
+  }
+});
 
 Schema.UserProfile = new SimpleSchema({
     firstName: {
