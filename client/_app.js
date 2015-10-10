@@ -54,10 +54,18 @@ angular.module('pnews', [
     .controller('appController', [
         '$scope',
         'SideNav',
+        'postFactory',
 
-        function ($scope, SideNav) {
+        function ($scope, SideNav, postFactory) {
             $scope.appName = 'pNews';
             $scope.sideNavItems = SideNav.sideNavItems;
+
+            $scope.addPost = function(post){
+                console.log('$scope.addPost')
+                console.log(post)
+                postFactory.addPost(post);
+            };
+
             $scope.burgerIconClick = function () {
                 SideNav.toggle();
             };
