@@ -15,14 +15,15 @@
                 <md-button class="side-nav-item md-primary md-default-theme"
                            ng-repeat="item in sideNavItems"
                            ui-sref-active="side-nav-active"
-                           ui-sref="{{::item.state}}">
+                           ui-sref="{{::item.state}}"
+                           ng-click="sideMenuItemClick()">
                     <div layout-fill layout="row"
                          layout-align="center center">
-                        <ng-md-icon class="side-nav-item-icon"
-                                    layout="column"
-                                    icon="{{::item.icon}}"
-                                    size="30">
-                        </ng-md-icon>
+                        <md-icon class="side-nav-item-icon"
+                                 layout="column"
+                                 md-svg-src="{{::item.icon}}"
+                                 size="30">
+                        </md-icon>
                         <div class="side-nav-item-title" layout="column"
                              layout-align="center start" flex>
                             <div ng-bind-html="item.template"></div>
@@ -43,7 +44,7 @@
 
             </md-toolbar>
 
-            <div id="container" ui-view="content" layout="column" flex>
+            <div id="container" ui-view="content">
                 Content placeholder
             </div>
 

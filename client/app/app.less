@@ -44,3 +44,66 @@
     fill: @white;
   }
 }
+
+.icon {
+  margin: 5px;
+}
+
+.thumb {
+  svg {
+    fill: @dark;
+  }
+}
+
+.thumb-up.active {
+  svg {
+    fill: @md-ok;
+  }
+}
+
+.thumb-down.active {
+  svg {
+    fill: @md-warn;
+  }
+}
+
+.author {
+  margin: 16px 8px 8px;
+
+  & .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-sizing: content-box;
+  }
+
+}
+
+.hash-tags {
+  .tag {
+    color: @md-primary;
+    background-color: fadeout(@md-primary, 70%);
+    border-radius: 2px;
+    margin: 0 2px;
+    padding: 2px;
+  }
+}
+
+.title {
+  margin-top: 16px;
+}
+
+.main-title {
+  margin: 5px 0;
+}
+
+.sub-title {
+  margin: 5px 0;
+}
+
+.post-actions {
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
