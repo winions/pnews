@@ -22,6 +22,14 @@ Schema.UserProfile = new SimpleSchema({
         allowedValues: ['Male', 'Female'],
         optional: true
     },
+        gcmToken: {
+        type: String,
+        optional: true
+    },
+        gcmUserId: {
+        type: String,
+        optional: true
+    },
     bio: {
         type: String,
         optional: true
@@ -42,16 +50,21 @@ Schema.UserProfile = new SimpleSchema({
 
 
 Schema.User = new SimpleSchema({
-    username: {
-        type: String,
-        regEx: /^[a-z0-9A-Z_]{3,15}$/
-    },
     emails: {
-        type: String,
+        type: [Object],
         optional: true
+    },
+    "emails.$.address": {
+        type: String,
+        regEx: SimpleSchema.RegEx.Email
     },
     createdAt: {
         type: Date
+    },
+        services: {
+        type: Object,
+        optional: true,
+        blackbox: true
     },
     profile: {
         type: Schema.UserProfile,
