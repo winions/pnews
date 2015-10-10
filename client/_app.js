@@ -55,8 +55,9 @@ angular.module('pnews', [
         '$scope',
         'SideNav',
         'postFactory',
+        'authFactory',
 
-        function ($scope, SideNav, postFactory) {
+        function ($scope, SideNav, postFactory, authFactory) {
             $scope.appName = 'pNews';
             $scope.sideNavItems = SideNav.sideNavItems;
 
@@ -64,6 +65,29 @@ angular.module('pnews', [
                 console.log('$scope.addPost')
                 console.log(post)
                 postFactory.addPost(post);
+            };
+
+            $scope.logIn = function(email, password){
+                console.log('$scope.login');
+                var result = authFactory.logIn(email, password);    
+                console.log(result);
+            };
+
+
+            $scope.logOut = function(email, password){
+                console.log('$scope.logOut');
+                authFactory.logOut();    
+            };
+
+
+            $scope.register = function(user){
+                console.log('$scope.register');
+                var result = authFactory.register(user);    
+            };
+
+            $scope.forgotPassword = function(email){
+                console.log('$scope.forgetPassword');
+                var result = authFactory.forgotPassword(email);    
             };
 
             $scope.burgerIconClick = function () {

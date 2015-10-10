@@ -4,4 +4,41 @@
     	
     </textarea>
     <button ng-click="addPost(post)">Post</button>
+    <hr>
+    
+    <label>First Name: </label>
+    <input ng-model= "user.profile.firstName">
+
+    <label>last Name: </label>
+    <input ng-model= "user.profile.lastName">
+
+	<label>Email: </label>
+    <input ng-model= "user.email">
+
+	<label>Password: </label>
+    <input ng-model= "user.password">
+
+    <button ng-click="register(user)">Register</button>
+    <hr>
+
+	<label>Email: </label>
+    <input ng-model= "email">
+
+	<label>Password: </label>
+    <input ng-model= "password">
+
+    <button ng-click="logIn(email, password)">Log In</button>
+    
+    <hr>
+
+    <button ng-click="logOut()">Log Out</button>
+
+    <hr>
+
+    <label>Your Email: </label>
+    <input ng-model= "forgetPasswordEmail">
+
+    <button ng-click="forgotPassword(forgetPasswordEmail)">forget password</button>
+    
+    <hr>
 </div>
