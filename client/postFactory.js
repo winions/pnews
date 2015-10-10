@@ -22,21 +22,12 @@ angular.module('pnews-factories')
                 return hashTags;
             }
 
-
-            function addHashTags(hashTags){
-                Meteor.call('addHashTag', hashTags);            }
-
-            function savePost(post){
-                
-            }
-
-
-            postFactory.addPost = function(post){
+            postFactory.addPost = function(series,post){
                 console.log('postFactory.addPost')
                 var hashTags = getHashTags(post.content);
                 console.log(hashTags);
-                addHashTags(hashTags);                 
-                savePost(hashTags);                 
+                Meteor.call('addHashTag', hashTags);
+                Meteor.call('addpost', series,post,true,'lklklkl');
             };
 
             return postFactory;
