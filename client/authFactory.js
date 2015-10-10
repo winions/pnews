@@ -2,8 +2,7 @@
 angular.module('pnews-factories')
 
     .factory('authFactory', [
-        '$rootScope',
-        function ($rootScope) {
+        function () {
             var authFactory = {};
 
             authFactory.logIn = function(email, password){
