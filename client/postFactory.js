@@ -1,8 +1,8 @@
 angular.module('pnews-factories')
 
     .factory('postFactory', [
-        '$rootScope',
-        function ($rootScope) {
+        '$rootScope','$meteor',
+        function ($rootScope,$meteor) {
             var postFactory = {};
 
             function getHashTags(content){
@@ -24,8 +24,7 @@ angular.module('pnews-factories')
 
 
             function addHashTags(hashTags){
-
-            }
+                Meteor.call('addHashTag', hashTags);            }
 
             function savePost(post){
                 
