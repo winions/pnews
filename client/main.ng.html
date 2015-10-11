@@ -1,4 +1,4 @@
-<div ui-view>
+<div ng-controller="appController">
 
     <div md-swipe-right="contentSwipeRight()"
          md-swipe-left="contentSwipeLeft()">
@@ -11,25 +11,7 @@
                 <h1 class="md-toolbar-tools">{{appName}}</h1>
             </md-toolbar>
 
-            <div layout="column">
-                <md-button class="side-nav-item md-primary md-default-theme"
-                           ng-repeat="item in sideNavItems"
-                           ui-sref-active="side-nav-active"
-                           ui-sref="{{::item.state}}"
-                           ng-click="sideMenuItemClick()">
-                    <div layout-fill layout="row"
-                         layout-align="center center">
-                        <md-icon class="side-nav-item-icon"
-                                 layout="column"
-                                 md-svg-src="{{::item.icon}}"
-                                 size="30">
-                        </md-icon>
-                        <div class="side-nav-item-title" layout="column"
-                             layout-align="center start" flex>
-                            <div ng-bind-html="item.template"></div>
-                        </div>
-                    </div>
-                </md-button>
+            <div ui-view="side-nav">
 
             </div>
         </md-sidenav>

@@ -1,0 +1,31 @@
+<div layout="column">
+    <div class="user-cover">
+        <div class="cover image-fit-width-container">
+            <img class="image-fit-width" src="img/cover.png"/>
+        </div>
+
+        <h2 class="name">{{currentUser.profile.firstName || 'username'}}</h2>
+
+        <img ng-src="{{currentUser.profile.photo || 'img/avatar.png'}}"
+             class="avatar"/>
+    </div>
+    <md-button class="side-nav-item md-primary md-default-theme"
+               ng-repeat="item in sideNavItems"
+               ui-sref-active="side-nav-active"
+               ui-sref="{{::item.state}}"
+               ng-click="sideMenuItemClick()">
+        <div layout-fill layout="row"
+             layout-align="center center">
+            <md-icon class="side-nav-item-icon"
+                     layout="column"
+                     md-svg-src="{{::item.icon}}"
+                     size="30">
+            </md-icon>
+            <div class="side-nav-item-title" layout="column"
+                 layout-align="center start" flex>
+                <div ng-bind-html="item.template"></div>
+            </div>
+        </div>
+    </md-button>
+
+</div>
